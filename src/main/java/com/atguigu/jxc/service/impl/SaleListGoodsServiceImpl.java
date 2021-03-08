@@ -1,8 +1,9 @@
-package com.atguigu.jxc.service;
+package com.atguigu.jxc.service.impl;
 
 import com.atguigu.jxc.dao.SaleListGoodsDao;
 import com.atguigu.jxc.domain.SaleListGoodsVo;
 import com.atguigu.jxc.entity.SaleListGoods;
+import com.atguigu.jxc.service.SaleListGoodsService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
