@@ -66,7 +66,7 @@ public class SupplierController {
      */
     @PostMapping("/getComboboxList")
     @RequiresPermissions(value = "供应商管理")
-    public ServiceVO<List<Supplier>> querySuppliersLikeKey( String q) {
+    public List<Supplier> querySuppliersLikeKey( String q) {
         return supplierService.querySuppliersLikeKey(q);
     }
 

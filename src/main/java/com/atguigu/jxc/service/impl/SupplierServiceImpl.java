@@ -80,8 +80,7 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public ServiceVO<List<Supplier>> querySuppliersLikeKey(String key) {
-        List<Supplier> suppliers=this.supplierDao.querySuppliersLikeKey(key);
-        return new ServiceVO<>(SuccessCode.SUCCESS_CODE,SuccessCode.SUCCESS_MESS,suppliers);
+    public List<Supplier> querySuppliersLikeKey(String key) {
+        return this.supplierDao.querySuppliersLikeKey(key);
     }
 }
