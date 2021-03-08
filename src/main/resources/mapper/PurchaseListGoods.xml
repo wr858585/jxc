@@ -5,19 +5,6 @@
 
 <mapper namespace="com.atguigu.jxc.dao.PurchaseListGoodsDao">
 
-    <resultMap id="BaseResultMap" type="com.atguigu.jxc.entity.PurchaseList">
-        <result column="purchase_list_goods_id" property="purchaseListGoodsId" jdbcType="INTEGER" />
-        <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
-        <result column="goods_code" property="goodsCode" jdbcType="VARCHAR" />
-        <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
-        <result column="goods_model" property="goodsModel" jdbcType="VARCHAR" />
-        <result column="goods_unit" property="goodsUnit" jdbcType="VARCHAR" />
-        <result column="goods_num" property="goodsNum" jdbcType="INTEGER" />
-        <result column="price" property="price" jdbcType="DECIMAL" />
-        <result column="total" property="total" jdbcType="DECIMAL" />
-        <result column="purchase_list_id" property="purchaseListId" jdbcType="INTEGER" />
-        <result column="goods_type_id" property="goodsTypeId" jdbcType="INTEGER" />
-    </resultMap>
 
 
 </mapper>
