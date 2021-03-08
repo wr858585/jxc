@@ -6,24 +6,24 @@
 <mapper namespace="com.atguigu.jxc.dao.CustomerDao">
 
     <resultMap id="BaseResultMap" type="com.atguigu.jxc.entity.Customer">
-        <result column="customer_id" property="customerId" jdbcType="INTEGER" />
-        <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
-        <result column="contacts" property="contacts" jdbcType="VARCHAR" />
-        <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
-        <result column="address" property="address" jdbcType="VARCHAR" />
-        <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+        <result column="customer_id" property="customerId" jdbcType="INTEGER"/>
+        <result column="customer_name" property="customerName" jdbcType="VARCHAR"/>
+        <result column="contacts" property="contacts" jdbcType="VARCHAR"/>
+        <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="getCustomerList" resultMap="BaseResultMap">
         SELECT
-            t_customer.customer_id,
-            t_customer.customer_name,
-            t_customer.contacts,
-            t_customer.phone_number,
-            t_customer.address,
-            t_customer.remarks
+        t_customer.customer_id,
+        t_customer.customer_name,
+        t_customer.contacts,
+        t_customer.phone_number,
+        t_customer.address,
+        t_customer.remarks
         FROM
-            t_customer
+        t_customer
         <where>
             <if test="customerName != null and customerName != ''">
                 t_customer.customer_name LIKE CONCAT('%', #{customerName} ,'%')
@@ -34,9 +34,9 @@
 
     <select id="getCustomerCount" resultType="java.lang.Integer">
         SELECT
-            COUNT(*)
+        COUNT(*)
         FROM
-            t_customer
+        t_customer
         <where>
             <if test="customerName != null and customerName != ''">
                 t_customer.customer_name LIKE CONCAT('%', #{customerName} ,'%')
@@ -44,9 +44,10 @@
         </where>
     </select>
 
-    <insert id="saveCustomer" useGeneratedKeys="true" keyProperty="customerId" parameterType="com.atguigu.jxc.entity.Customer">
+    <insert id="saveCustomer" useGeneratedKeys="true" keyProperty="customerId"
+            parameterType="com.atguigu.jxc.entity.Customer">
         INSERT INTO t_customer
-        (customer_name, contacts, phone_number, address, remarks)
+            (customer_name, contacts, phone_number, address, remarks)
         VALUES (#{customerName}, #{contacts}, #{phoneNumber}, #{address}, #{remarks})
     </insert>
 
@@ -73,6 +74,22 @@
     </update>
 
     <select id="getCustomerById" resultMap="BaseResultMap">
+        SELECT t_customer.customer_id,
+               t_customer.customer_name,
+               t_customer.contacts,
+               t_customer.phone_number,
+               t_customer.address,
+               t_customer.remarks
+        FROM t_customer
+        WHERE customer_id = #{customerId}
+    </select>
+
+    <delete id="deleteCustomer" parameterType="java.lang.Integer">
+        DELETE
+        FROM t_customer
+        WHERE customer_id = #{customerId}
+    </delete>
+    <select id="getComboboxListByCustomerName" parameterType="java.lang.String" resultMap="BaseResultMap">
         SELECT
             t_customer.customer_id,
             t_customer.customer_name,
@@ -82,16 +99,7 @@
             t_customer.remarks
         FROM
             t_customer
-        WHERE
-            customer_id = #{customerId}
     </select>
-
-    <delete id="deleteCustomer" parameterType="java.lang.Integer">
-        DELETE FROM
-        t_customer
-        WHERE customer_id = #{customerId}
-    </delete>
-
 
 
 </mapper>

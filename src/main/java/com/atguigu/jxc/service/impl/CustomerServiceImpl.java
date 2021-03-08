@@ -27,14 +27,14 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Map<String, Object> list(Integer page, Integer rows, String customerName) {
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
 
         page = page == 0 ? 1 : page;
         int offSet = (page - 1) * rows;
 
         List<Customer> customers = customerDao.getCustomerList(offSet, rows, customerName);
 
-        logService.save(new Log(Log.SELECT_ACTION,"分页查询客户"));
+        logService.save(new Log(Log.SELECT_ACTION, "分页查询客户"));
 
         map.put("total", customerDao.getCustomerCount(customerName));
 
@@ -46,15 +46,15 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public ServiceVO save(Customer customer) {
 
-        if(customer.getCustomerId() == null){
+        if (customer.getCustomerId() == null) {
 
             customerDao.saveCustomer(customer);
-            logService.save(new Log(Log.INSERT_ACTION,"添加客户:"+customer.getCustomerName()));
+            logService.save(new Log(Log.INSERT_ACTION, "添加客户:" + customer.getCustomerName()));
 
-        }else{
+        } else {
 
             customerDao.updateCustomer(customer);
-            logService.save(new Log(Log.UPDATE_ACTION,"修改客户:"+customer.getCustomerName()));
+            logService.save(new Log(Log.UPDATE_ACTION, "修改客户:" + customer.getCustomerName()));
 
         }
         return new ServiceVO<>(SuccessCode.SUCCESS_CODE, SuccessCode.SUCCESS_MESS);
@@ -65,7 +65,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         String[] idArray = ids.split(",");
 
-        for(String id : idArray){
+        for (String id : idArray) {
 
             logService.save(new Log(Log.DELETE_ACTION,
                     "删除客户:" + customerDao.getCustomerById(Integer.parseInt(id)).getCustomerName()));
@@ -75,6 +75,11 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         return new ServiceVO<>(SuccessCode.SUCCESS_CODE, SuccessCode.SUCCESS_MESS);
+    }
+
+    @Override
+    public List<Customer> getComboboxList() {
+        return customerDao.getComboboxListByCustomerName();
     }
 
 }

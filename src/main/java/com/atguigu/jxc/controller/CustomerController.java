@@ -7,6 +7,7 @@ import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -25,19 +26,21 @@ public class CustomerController {
 
     /**
      * 分页查询客户
-     * @param page 当前页数
-     * @param rows 每页显示的记录数
+     *
+     * @param page         当前页数
+     * @param rows         每页显示的记录数
      * @param customerName 客户名
      * @return
      */
     @RequestMapping("/list")
     @RequiresPermissions(value = "客户管理")// 有客户管理菜单权限的才给予调用
-    public Map<String,Object> list(Integer page, Integer rows, String customerName) {
+    public Map<String, Object> list(Integer page, Integer rows, String customerName) {
         return customerService.list(page, rows, customerName);
     }
 
     /**
      * 添加或修改客户
+     *
      * @param customer 客户实体
      * @return
      */
@@ -49,6 +52,7 @@ public class CustomerController {
 
     /**
      * 删除客户
+     *
      * @param ids 客户ids字符串，用逗号分隔
      * @return
      */
@@ -56,5 +60,12 @@ public class CustomerController {
     @RequiresPermissions(value = "客户管理")
     public ServiceVO delete(String ids) {
         return customerService.delete(ids);
+    }
+
+
+    @RequestMapping(value = "/getComboboxList", method = RequestMethod.POST)
+    @RequiresPermissions(value = "客户管理")
+    public List<Customer> getComboboxList() {
+        return customerService.getComboboxList();
     }
 }
