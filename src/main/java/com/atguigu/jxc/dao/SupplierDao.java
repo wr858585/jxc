@@ -22,5 +22,5 @@ public interface SupplierDao {
 
     Integer deleteSupplier(Integer supplierId);
 
-
+    List<Supplier> querySuppliersLikeKey(@Param("key") String key);
 }
