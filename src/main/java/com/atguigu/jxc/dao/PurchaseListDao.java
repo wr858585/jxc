@@ -1,7 +1,10 @@
 package com.atguigu.jxc.dao;
 
+import com.atguigu.jxc.domain.PurchaseListQueryVo;
 import com.atguigu.jxc.entity.PurchaseList;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @author zqq
@@ -9,4 +12,8 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface PurchaseListDao {
     Integer savePurchaseList( PurchaseList purchaseList);
+
+    List<PurchaseList> purchaseListListByQueryParam(PurchaseListQueryVo purchaseListQueryVo);
+
+    Integer deletePurchaseListById(Integer purchaseListId);
 }
