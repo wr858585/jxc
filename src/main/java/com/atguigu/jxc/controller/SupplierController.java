@@ -3,9 +3,12 @@ package com.atguigu.jxc.controller;
 import com.atguigu.jxc.domain.ServiceVO;
 import com.atguigu.jxc.entity.Supplier;
 import com.atguigu.jxc.service.SupplierService;
+import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -56,4 +59,16 @@ public class SupplierController {
     public ServiceVO delete(String ids) {
         return supplierService.delete(ids);
     }
+    /**
+     * 根据关键字模糊查询供应商
+     * @param q 供应商模糊查询字符串
+     * @return
+     */
+    @PostMapping("/getComboboxList")
+    @RequiresPermissions(value = "供应商管理")
+    public ServiceVO<List<Supplier>> querySuppliersLikeKey( String q) {
+        return supplierService.querySuppliersLikeKey(q);
+    }
+
+
 }

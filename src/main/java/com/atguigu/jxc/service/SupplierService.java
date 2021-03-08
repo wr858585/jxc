@@ -17,4 +17,6 @@ public interface SupplierService {
     ServiceVO save(Supplier supplier);
 
     ServiceVO delete(String ids);
+
+    ServiceVO<List<Supplier>> querySuppliersLikeKey(String key);
 }

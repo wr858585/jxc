@@ -14,6 +14,23 @@
         <result column="remarks" property="remarks" jdbcType="VARCHAR" />
     </resultMap>
 
+    <select id="querySuppliersLikeKey" resultMap="BaseResultMap">
+        SELECT
+            t_supplier.supplier_id,
+            t_supplier.supplier_name,
+            t_supplier.phone_number,
+            t_supplier.contacts,
+            t_supplier.address,
+            t_supplier.remarks
+        FROM
+            t_supplier
+        <where>
+            <if test="key != null">
+                t_supplier.supplier_name LIKE  CONCAT('%',#{key},'%')
+            </if>
+        </where>
+    </select>
+
     <select id="getSupplierList" resultMap="BaseResultMap">
         SELECT
             t_supplier.supplier_id,
