@@ -1,14 +1,18 @@
 package com.atguigu.jxc.service.impl;
 
 import com.atguigu.jxc.dao.ReturnListDao;
+import com.atguigu.jxc.dao.UserDao;
 import com.atguigu.jxc.domain.ErrorCode;
 import com.atguigu.jxc.domain.ServiceVO;
 import com.atguigu.jxc.domain.SuccessCode;
 import com.atguigu.jxc.entity.ReturnList;
+import com.atguigu.jxc.entity.User;
 import com.atguigu.jxc.service.ReturnListService;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,11 +20,19 @@ import java.util.Map;
 @Service
 public class ReturnListServiceImpl implements ReturnListService {
 
-    @Autowired
+    @Resource
     private ReturnListDao returnListDao;
+
+    @Resource
+    private UserDao userDao;
 
     @Override
     public Integer saveReturnList(ReturnList returnList) {
+
+        // 设置当前操作用户
+        User currentUser = userDao.findUserByName((String) SecurityUtils.getSubject().getPrincipal());
+        returnList.setUserId(currentUser.getUserId());
+
         return returnListDao.saveReturnList(returnList);
     }
 

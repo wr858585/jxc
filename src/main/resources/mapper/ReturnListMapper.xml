@@ -45,10 +45,10 @@
             AND t1.state=#{state}
         </if>
         <if test="sTime != null and sTime != '' ">
-            AND t1.return_date &gt; #{sTime}
+            AND t1.return_date &gt;= #{sTime}
         </if>
         <if test="eTime != null and eTime != '' ">
-            AND t1.return_date &lt; #{eTime}
+            AND t1.return_date &lt;= #{eTime}
         </if>
         </where>
     </select>
