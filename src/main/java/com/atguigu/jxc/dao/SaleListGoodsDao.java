@@ -13,4 +13,6 @@ public interface SaleListGoodsDao {
     List<SaleListGoodsVo> saleListGoods(String sTime, String eTime, Integer goodsTypeId, String codeOrName);
 
     List<GetSaleDataByDayVo> getSaleDataByDay(String sTime, String eTime);
+
+    List<GetSaleDataByDayVo> getSaleDataByMonth(String sTime, String eTime);
 }

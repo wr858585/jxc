@@ -40,4 +40,17 @@ public class SaleListGoodsServiceImpl implements SaleListGoodsService {
         System.out.println(str);
         return str;
     }
+
+    @Override
+    public String getSaleDataByMonth(String sTime, String eTime) {
+        List<GetSaleDataByDayVo> getSaleDataByMonthVos=saleListGoodsDao.getSaleDataByMonth(sTime,eTime);
+        getSaleDataByMonthVos.stream().map(getSaleDataByMonthVo -> {
+            getSaleDataByMonthVo.setProfit(getSaleDataByMonthVo.getSaleTotal()-getSaleDataByMonthVo.getPurchasingTotal());
+            return getSaleDataByMonthVo;
+        }).collect(Collectors.toList());
+        Gson gson = new Gson();
+        String str=gson.toJson(getSaleDataByMonthVos);
+        System.out.println(str);
+        return str;
+    }
 }

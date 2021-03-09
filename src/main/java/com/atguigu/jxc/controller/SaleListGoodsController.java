@@ -28,4 +28,9 @@ public class SaleListGoodsController {
     public String getSaleDataByDay(String sTime, String eTime ) {
         return saleListGoodsService.getSaleDataByDay(sTime, eTime);
     }
+
+    @PostMapping("/getSaleDataByMonth")
+    public String getSaleDataByMonth(String sTime, String eTime ) {
+        return saleListGoodsService.getSaleDataByMonth(sTime, eTime);
+    }
 }
