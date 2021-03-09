@@ -7,4 +7,7 @@
         SET t_sale_list.state = 1
         WHERE t_sale_list.sale_list_id = #{saleListId}
     </update>
+
+    <select id="getSaleDataByDay" resultType="com.atguigu.jxc.domain.StatsVo">
+    </select>
 </mapper>

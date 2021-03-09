@@ -1,6 +1,10 @@
 package com.atguigu.jxc.entity;
 
 import lombok.Data;
+
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * 进货单
  */

@@ -43,4 +43,9 @@ public class PurchaseListGoodsServiceImpl implements PurchaseListGoodsService {
     public void updateState(Integer purchaseListId) {
         this.purchaseListGoodsDao.updateState(purchaseListId);
     }
+
+    @Override
+    public void save(String purchaseNumber,PurchaseList purchaseList, String purchaseListGoodsStr) {
+        this.purchaseListGoodsDao.save(purchaseNumber,purchaseList, purchaseListGoodsStr);
+    }
 }

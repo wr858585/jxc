@@ -5,6 +5,7 @@ import com.atguigu.jxc.service.SaleListGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -28,4 +29,11 @@ public class SaleListGoodsController {
         this.saleListGoodsService.updateState(saleListId);
         return new ServiceVO(100, "请求成功", null);
     }
+
+    @PostMapping("getSaleDataByDay")
+    public String getSaleDataByDay(@RequestParam("sTime") String sTime, @RequestParam("eTime") String eTime) {
+        String json = this.saleListGoodsService.getSaleDataByDay(sTime, eTime);
+        return json;
+    }
+
 }

@@ -6,4 +6,6 @@ package com.atguigu.jxc.service;
  */
 public interface SaleListGoodsService {
     void updateState(Integer saleListId);
+
+    String getSaleDataByDay(String sTime, String eTime);
 }

@@ -1,5 +1,7 @@
 package com.atguigu.jxc.service;
 
+import com.atguigu.jxc.entity.PurchaseList;
+
 import java.util.Map;
 
 /**
@@ -12,4 +14,6 @@ public interface PurchaseListGoodsService {
     Map<String, Object> list(String purchaseNumber, Integer supplierId, Integer state, String sTime, String eTime);
 
     void updateState(Integer purchaseListId);
+
+    void save(String purchaseNumber,PurchaseList purchaseList, String purchaseListGoodsStr);
 }

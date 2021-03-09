@@ -23,4 +23,6 @@ public interface PurchaseListGoodsDao {
     void updateState(@Param("purchaseListId") Integer purchaseListId);
 
     List<PurchaseVo> count(@Param("sTime") String sTime, @Param("eTime") String eTime, @Param("goodsTypeId") Integer goodsTypeId, @Param("codeOrName") String codeOrName);
+
+    void save(@Param("purchaseNumber") String purchaseNumber, @Param("purchaseList") PurchaseList purchaseList, @Param("purchaseListGoodsStr") String purchaseListGoodsStr);
 }

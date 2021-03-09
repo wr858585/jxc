@@ -102,6 +102,9 @@
             </if>
         </where>
     </select>
+
+    <insert id="save">
+    </insert>
 </mapper>
 
 

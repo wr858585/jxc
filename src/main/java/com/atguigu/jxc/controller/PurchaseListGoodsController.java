@@ -2,6 +2,7 @@ package com.atguigu.jxc.controller;
 
 import com.atguigu.jxc.domain.ServiceVO;
 import com.atguigu.jxc.domain.SuccessCode;
+import com.atguigu.jxc.entity.PurchaseList;
 import com.atguigu.jxc.service.PurchaseListGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -67,6 +68,13 @@ public class PurchaseListGoodsController {
     public Map<String,Object> list(String purchaseNumber, Integer supplierId, Integer state, String sTime, String eTime) {
         Map<String,Object> map = this.purchaseListGoodsService.list(purchaseNumber,supplierId,state,sTime,eTime);
         return map;
+    }
+
+    @PostMapping("save")
+    @ResponseBody
+    public ServiceVO save(@RequestParam("purchaseNumber") String purchaseNumber, PurchaseList purchaseList, String purchaseListGoodsStr) {
+        this.purchaseListGoodsService.save(purchaseNumber,purchaseList, purchaseListGoodsStr);
+        return new ServiceVO(SuccessCode.SUCCESS_CODE, SuccessCode.SUCCESS_MESS, null);
     }
 
 
