@@ -12,14 +12,14 @@ import java.util.Date;
 public class PurchaseVo {
 
     private String number;
-    private Date date;
+    private String date;
     private String supplierName;
     private String code;
     private String name;
     private String model;
     private String goodsType;
     private String unit;
-    private double price;
-    private double total;
+    private Double price;
     private Integer num;
+    private Double total;
 }

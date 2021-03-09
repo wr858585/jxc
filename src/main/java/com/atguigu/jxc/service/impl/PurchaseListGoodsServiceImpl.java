@@ -25,12 +25,7 @@ public class PurchaseListGoodsServiceImpl implements PurchaseListGoodsService {
 
     @Override
     public String count(String sTime, String eTime, Integer goodsTypeId, String codeOrName) {
-
-        ArrayList<Object> list = new ArrayList<>();
-
-        PurchaseVo purchaseVo = new PurchaseVo();
-        purchaseVo.setNumber(null);
-        purchaseVo.setNum(null);
+        List<PurchaseVo> list = this.purchaseListGoodsDao.count(sTime, eTime, goodsTypeId, codeOrName);
         Gson gson = new Gson();
         String json = gson.toJson(list);
         return json;
@@ -42,5 +37,10 @@ public class PurchaseListGoodsServiceImpl implements PurchaseListGoodsService {
         List<PurchaseList> list = this.purchaseListGoodsDao.list(purchaseNumber,supplierId,state,sTime,eTime);
         map.put("rows", list);
         return map;
+    }
+
+    @Override
+    public void updateState(Integer purchaseListId) {
+        this.purchaseListGoodsDao.updateState(purchaseListId);
     }
 }

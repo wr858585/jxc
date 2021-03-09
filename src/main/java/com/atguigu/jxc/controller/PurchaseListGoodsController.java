@@ -29,7 +29,7 @@ public class PurchaseListGoodsController {
     @ResponseBody
     @PostMapping("/updateState")
     public ServiceVO updateState(Integer purchaseListId) {
-
+        this.purchaseListGoodsService.updateState(purchaseListId);
         return new ServiceVO(SuccessCode.SUCCESS_CODE,SuccessCode.SUCCESS_MESS,null);
     }
 
@@ -42,6 +42,7 @@ public class PurchaseListGoodsController {
      * @return
      */
     @PostMapping("/count")
+    @ResponseBody
     public String count(
             @RequestParam("sTime")String sTime,
             @RequestParam("eTime")String eTime,
@@ -67,5 +68,6 @@ public class PurchaseListGoodsController {
         Map<String,Object> map = this.purchaseListGoodsService.list(purchaseNumber,supplierId,state,sTime,eTime);
         return map;
     }
+
 
 }
