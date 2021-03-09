@@ -78,4 +78,9 @@ public class SupplierServiceImpl implements SupplierService {
         }
         return new ServiceVO<>(SuccessCode.SUCCESS_CODE, SuccessCode.SUCCESS_MESS);
     }
+
+    @Override
+    public List<Supplier> querySuppliersLikeKey(String key) {
+        return this.supplierDao.querySuppliersLikeKey(key);
+    }
 }
