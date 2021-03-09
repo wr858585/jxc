@@ -17,4 +17,5 @@ public class CustomerReturnListGoodsController {
     public String count(String sTime, String eTime ,Integer goodsTypeId, String codeOrName) {
         return CustomerReturnListGoodsService.count(sTime, eTime,goodsTypeId,codeOrName);
     }
+
 }

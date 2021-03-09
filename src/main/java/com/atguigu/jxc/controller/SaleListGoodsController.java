@@ -23,4 +23,9 @@ public class SaleListGoodsController {
     public String count(String sTime, String eTime ,Integer goodsTypeId, String codeOrName) {
         return saleListGoodsService.count(sTime, eTime,goodsTypeId,codeOrName);
     }
+
+    @PostMapping("/getSaleDataByDay")
+    public String getSaleDataByDay(String sTime, String eTime ) {
+        return saleListGoodsService.getSaleDataByDay(sTime, eTime);
+    }
 }
