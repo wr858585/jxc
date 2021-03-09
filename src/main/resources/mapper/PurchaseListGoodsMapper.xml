@@ -19,6 +19,7 @@
     <select id="list" resultMap="listResultMap">
         SELECT
         p.purchase_list_id,
+        p.purchase_number,
         p.amount_paid,
         p.amount_payable,
         p.purchase_date,
@@ -63,8 +64,8 @@
     </update>
 
     <resultMap id="countResultMap" type="com.atguigu.jxc.domain.PurchaseVo">
-        <result column="purchase_num" property="number" jdbcType="VARCHAR"/>
-        <result column="purchase_date" property="date" jdbcType="VARCHAR" />
+        <result column="return_number" property="number" jdbcType="VARCHAR"/>
+        <result column="return_date" property="date" jdbcType="VARCHAR" />
         <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
         <result column="goods_code" property="code" jdbcType="VARCHAR" />
         <result column="goods_name" property="name" jdbcType="VARCHAR" />
