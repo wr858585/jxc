@@ -16,6 +16,8 @@ public interface GoodsService {
 */
     ServiceVO getCode();
 
+    ServiceVO updateCount(Integer id,Integer count);
+
     ServiceVO save(Goods goods);
 
     ServiceVO delete(Integer goodsId);

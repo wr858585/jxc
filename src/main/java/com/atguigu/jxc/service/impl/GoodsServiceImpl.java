@@ -94,6 +94,20 @@ public class GoodsServiceImpl implements GoodsService {
         return new ServiceVO<>(SuccessCode.SUCCESS_CODE, SuccessCode.SUCCESS_MESS, unitCode);
     }
 
+    /**
+     * 根据id跟新商品库存
+     * @param id
+     * @param count
+     * @return
+     */
+    @Override
+    public ServiceVO updateCount(Integer id, Integer count) {
+        Goods goods = goodsDao.findByGoodsId(id);
+        goods.setInventoryQuantity(goods.getInventoryQuantity()+count);
+        goodsDao.updateGoods(goods);
+        return new ServiceVO(SuccessCode.SUCCESS_CODE,SuccessCode.SUCCESS_MESS);
+    }
+
     @Override
     public ServiceVO save(Goods goods) {
 
