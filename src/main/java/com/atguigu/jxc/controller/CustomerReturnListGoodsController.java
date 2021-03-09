@@ -15,8 +15,9 @@ import java.util.Map;
 @RequestMapping("/customerReturnListGoods")
 public class CustomerReturnListGoodsController {
 
+
     @Autowired
-    CustomerReturnListService customerReturnListService;
+    private CustomerReturnListService customerReturnListService;
 
     @RequestMapping(value = "/save")
     public ServiceVO save(CustomerReturnList customerReturnList, String customerReturnListGoodsStr) {

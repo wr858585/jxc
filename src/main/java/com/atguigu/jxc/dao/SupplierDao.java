@@ -24,4 +24,5 @@ public interface SupplierDao {
 
     List<Supplier> querySuppliersLikeKey(@Param("key") String key);
     List<Supplier> getComboboxList(String q);
+
 }
