@@ -1,8 +1,16 @@
 package com.atguigu.jxc.service.impl;
 
+import com.atguigu.jxc.dao.GoodsDao;
 import com.atguigu.jxc.dao.SaleListGoodsDao;
-import com.atguigu.jxc.entity.SaleList;
+import com.atguigu.jxc.dao.UserDao;
+import com.atguigu.jxc.domain.ServiceVO;
+import com.atguigu.jxc.domain.SuccessCode;
+import com.atguigu.jxc.entity.*;
+import com.atguigu.jxc.service.LogService;
 import com.atguigu.jxc.service.SaleListGoodsService;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,12 +19,33 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import com.atguigu.jxc.dao.GoodsDao;
+import com.atguigu.jxc.dao.SaleListGoodsDao;
+import com.atguigu.jxc.dao.UserDao;
+import com.atguigu.jxc.domain.ServiceVO;
+import com.atguigu.jxc.domain.SuccessCode;
+import com.atguigu.jxc.entity.*;
+import com.atguigu.jxc.service.LogService;
+import com.atguigu.jxc.service.SaleListGoodsService;
+import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import org.apache.shiro.SecurityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
 @Service
 public class SaleListGoodsServiceImpl implements SaleListGoodsService {
 
     @Autowired
     SaleListGoodsDao saleListGoodsDao;
+    @Autowired
+    private UserDao userDao;
+    @Autowired
+    private LogService logService;
+    @Autowired
+    private GoodsDao goodsDao;
 
     @Override
     public Map<String, Object> listBy(String saleNumber, Integer customerId, Integer state, String sTime, String eTime) {
@@ -43,33 +72,7 @@ public class SaleListGoodsServiceImpl implements SaleListGoodsService {
     @Override
     public Boolean deleteBySidOnSaleListGoods(Integer saleListId) {
         return saleListGoodsDao.deleteBySidOnSaleListGoods(saleListId);
-import com.atguigu.jxc.dao.GoodsDao;
-import com.atguigu.jxc.dao.SaleListGoodsDao;
-import com.atguigu.jxc.dao.UserDao;
-import com.atguigu.jxc.domain.ServiceVO;
-import com.atguigu.jxc.domain.SuccessCode;
-import com.atguigu.jxc.entity.*;
-import com.atguigu.jxc.service.LogService;
-import com.atguigu.jxc.service.SaleListGoodsService;
-import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import org.apache.shiro.SecurityUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-
-@Service
-public class SaleListGoodsServiceImpl implements SaleListGoodsService {
-    @Autowired
-    private UserDao userDao;
-    @Autowired
-    private LogService logService;
-    @Autowired
-    private SaleListGoodsDao saleListGoodsDao;
-    @Autowired
-    private GoodsDao goodsDao;
+    }
 
     //当用户点击保存，进行销售出库单新增，同时相应商品库存进行扣减
     @Override
