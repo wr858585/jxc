@@ -4,9 +4,14 @@ import com.atguigu.jxc.domain.ServiceVO;
 import com.atguigu.jxc.entity.ReturnList;
 import com.atguigu.jxc.service.ReturnListGoodsService;
 import com.atguigu.jxc.service.ReturnListService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.atguigu.jxc.service.ReturnListGoodsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Map;
@@ -20,6 +25,7 @@ public class ReturnListGoodsController {
 
     @Resource
     private ReturnListGoodsService returnListGoodsService;
+
 
     @PostMapping("delete")
     public ServiceVO deleteReturnList(Integer returnListId){
@@ -47,4 +53,23 @@ public class ReturnListGoodsController {
         return returnListGoodsService.saveReturnListGoods(returnList.getReturnListId(), returnListGoodsStr);
     }
 
+
+    /**
+     * 退货统计（可根据 商品类别、商品编码或名称 条件查询）
+     * @param sTime
+     * @param eTime
+     * @param goodsTypeId
+     * @param codeOrName
+     * @return
+     */
+    @PostMapping("/count")
+    public String count(
+            @RequestParam("sTime")String sTime,
+            @RequestParam("eTime")String eTime,
+            @RequestParam("goodsTypeId")Integer goodsTypeId,
+            @RequestParam("codeOrName")String codeOrName
+    ){
+        String data = this.returnListGoodsService.count(sTime, eTime, goodsTypeId, codeOrName);
+        return data;
+    }
 }

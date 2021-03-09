@@ -35,4 +35,46 @@
     </update>
 
 
+
+
+
+    <resultMap id="countResultMap" type="com.atguigu.jxc.domain.PurchaseVo">
+        <result column="purchase_num" property="number" jdbcType="VARCHAR"/>
+        <result column="purchase_date" property="date" jdbcType="VARCHAR" />
+        <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
+        <result column="goods_code" property="code" jdbcType="VARCHAR" />
+        <result column="goods_name" property="name" jdbcType="VARCHAR" />
+        <result column="goods_model" property="model" jdbcType="VARCHAR" />
+        <result column="goods_type_name" property="goodsType" jdbcType="VARCHAR" />
+        <result column="goods_unit" property="unit" jdbcType="VARCHAR" />
+        <result column="price" property="price" jdbcType="FLOAT" />
+        <result column="goods_num" property="num" jdbcType="INTEGER" />
+        <result column="total" property="total" jdbcType="FLOAT" />
+    </resultMap>
+
+    <select id="count" resultMap="countResultMap">
+        SELECT r2.return_number,r2.return_date,s.supplier_name,r.goods_code,r.goods_name,r.goods_model,g.goods_type_name,r.goods_unit,r.price,r.goods_num,r.total
+        FROM t_return_list_goods r
+        LEFT JOIN t_return_list r2
+        ON r.return_list_id = r2.return_list_id
+        LEFT JOIN t_goods_type g
+        ON r.goods_type_id = g.goods_type_id
+        LEFT JOIN t_supplier s
+        ON r2.`supplier_id` = s.`supplier_id`
+        <where>
+            <if test="sTime != null and sTime != ''">
+                AND r2.return_date &gt;= #{sTime}
+            </if>
+            <if test="eTime != null and eTime != ''">
+                AND r2.return_date &lt;= #{eTime}
+            </if>
+            <if test="goodsTypeId != null and goodsTypeId != ''">
+                AND g.goods_type_id = #{goodsTypeId}
+            </if>
+            <if test="codeOrName != null and codeOrName != ''">
+                AND r.goods_name = #{codeOrName}
+                or r.goods_code = #{codeOrName}
+            </if>
+        </where>
+    </select>
 </mapper>

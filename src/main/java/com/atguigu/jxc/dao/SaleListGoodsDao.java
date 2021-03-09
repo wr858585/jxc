@@ -19,4 +19,5 @@ public interface SaleListGoodsDao {
 
     Integer saveSaleListGoods(SaleListGoods saleListGoods);
 
+    void updateState(@Param(" ") Integer saleListId);
 }

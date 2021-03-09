@@ -35,6 +35,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import com.atguigu.jxc.dao.SaleListGoodsDao;
+import com.atguigu.jxc.service.SaleListGoodsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+/**
+ * @author zllstart
+ * @create 2021-03-08-21:19
+ */
 @Service
 public class SaleListGoodsServiceImpl implements SaleListGoodsService {
 
@@ -95,7 +104,12 @@ public class SaleListGoodsServiceImpl implements SaleListGoodsService {
             goodsDao.updateGoods(goods);
         }
         // 保存日志
-        logService.save(new Log(Log.INSERT_ACTION, "新增商品售出单："+saleList.getSaleNumber()));
+        logService.save(new Log(Log.INSERT_ACTION, "新增商品售出单：" + saleList.getSaleNumber()));
         return new ServiceVO<>(SuccessCode.SUCCESS_CODE, SuccessCode.SUCCESS_MESS);
+    }
+
+    @Override
+    public void updateState(Integer saleListId) {
+        this.saleListGoodsDao.updateState(saleListId);
     }
 }

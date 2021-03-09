@@ -15,4 +15,6 @@ public interface ReturnListGoodsService {
 
     Map<String, Object> queryReturnGoodsList(Integer returnListId);
 
+
+    String count(String sTime, String eTime, Integer goodsTypeId, String codeOrName);
 }

@@ -83,4 +83,8 @@ public class SupplierServiceImpl implements SupplierService {
     public List<Supplier> querySuppliersLikeKey(String key) {
         return this.supplierDao.querySuppliersLikeKey(key);
     }
+    public List<Supplier> getComboboxList(String q) {
+        List<Supplier> suppliers = this.supplierDao.getComboboxList(q);
+        return suppliers;
+    }
 }

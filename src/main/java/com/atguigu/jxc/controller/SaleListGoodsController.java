@@ -13,6 +13,11 @@ import com.atguigu.jxc.service.SaleListGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import com.atguigu.jxc.service.SaleListGoodsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
@@ -48,16 +53,28 @@ public class SaleListGoodsController {
 
     @PostMapping("delete")
     @ResponseBody
-    public ServiceVO deleteBySid(@RequestParam Integer saleListId){
+    public ServiceVO deleteBySid(@RequestParam Integer saleListId) {
         //先删除saleListGoods表
-        Boolean b1 =saleListGoodsService.deleteBySidOnSaleListGoods(saleListId);
+        Boolean b1 = saleListGoodsService.deleteBySidOnSaleListGoods(saleListId);
         //再删除saleList表
         Boolean b = saleListGoodsService.deleteBySid(saleListId);
 
-        if (b&&b1){
-            return new ServiceVO(SuccessCode.SUCCESS_CODE,SuccessCode.SUCCESS_MESS);
-        }else {
-            return new ServiceVO(ErrorCode.HAS_FORM_ERROR_CODE,ErrorCode.HAS_FORM_ERROR_MESS);
+        if (b && b1) {
+            return new ServiceVO(SuccessCode.SUCCESS_CODE, SuccessCode.SUCCESS_MESS);
+        } else {
+            return new ServiceVO(ErrorCode.HAS_FORM_ERROR_CODE, ErrorCode.HAS_FORM_ERROR_MESS);
         }
+    }
+
+
+    /**
+     * 支付结算（修改销售单付款状态）
+     * @param saleListId
+     * @return
+     */
+    @PostMapping("/updateState")
+    public ServiceVO updateState(Integer saleListId){
+        this.saleListGoodsService.updateState(saleListId);
+        return new ServiceVO(100, "请求成功", null);
     }
 }

@@ -2,6 +2,7 @@ package com.atguigu.jxc.service.impl;
 
 import com.atguigu.jxc.dao.GoodsDao;
 import com.atguigu.jxc.dao.ReturnListGoodsDao;
+import com.atguigu.jxc.domain.PurchaseVo;
 import com.atguigu.jxc.domain.ServiceVO;
 import com.atguigu.jxc.domain.SuccessCode;
 import com.atguigu.jxc.entity.Goods;
@@ -10,12 +11,21 @@ import com.atguigu.jxc.entity.ReturnListGoods;
 import com.atguigu.jxc.service.ReturnListGoodsService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.atguigu.jxc.dao.ReturnListGoodsDao;
+import com.atguigu.jxc.domain.PurchaseVo;
+import com.atguigu.jxc.service.ReturnListGoodsService;
+import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ReturnListGoodsServiceImpl implements ReturnListGoodsService {
@@ -51,4 +61,13 @@ public class ReturnListGoodsServiceImpl implements ReturnListGoodsService {
         return map;
     }
 
+
+
+    @Override
+    public String count(String sTime, String eTime, Integer goodsTypeId, String codeOrName) {
+        List<PurchaseVo> list = this.returnListGoodsDao.count(sTime, eTime, goodsTypeId, codeOrName);
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        return json;
+    }
 }

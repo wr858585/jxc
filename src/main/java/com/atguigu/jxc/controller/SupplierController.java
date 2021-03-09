@@ -8,6 +8,8 @@ import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.Mapping;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,6 +39,15 @@ public class SupplierController {
     public Map<String,Object> list(Integer page, Integer rows, String supplierName) {
         return supplierService.list(page, rows, supplierName);
     }
+
+//    /**
+//     * 查询供应商
+//     * @return
+//     */
+//    @PostMapping("/getComboboxList")
+//    public List<Supplier> getComboboxList(String q) {
+//        return supplierService.getComboboxList(q);
+//    }
 
     /**
      * 添加或修改供应商

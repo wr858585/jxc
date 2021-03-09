@@ -97,4 +97,10 @@
             #{goodsNum}, #{price}, #{total}, #{saleListId}, #{goodsTypeId}
         )
     </insert>
+
+    <update id="updateState" parameterType="integer">
+        UPDATE t_sale_list
+        SET t_sale_list.state = 1
+        WHERE t_sale_list.sale_list_id = #{saleListId}
+    </update>
 </mapper>

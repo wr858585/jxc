@@ -15,4 +15,6 @@ public interface SaleListGoodsService {
     Boolean deleteBySidOnSaleListGoods(Integer saleListId);
 
     ServiceVO save(SaleList saleList, String saleListGoodsStr);
+
+    void updateState(Integer saleListId);
 }
