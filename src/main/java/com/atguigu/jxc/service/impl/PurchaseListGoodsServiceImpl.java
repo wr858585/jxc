@@ -7,6 +7,7 @@ import com.atguigu.jxc.domain.ServiceVO;
 import com.atguigu.jxc.domain.SuccessCode;
 import com.atguigu.jxc.entity.PurchaseList;
 import com.atguigu.jxc.entity.PurchaseListGoods;
+import com.atguigu.jxc.service.GoodsService;
 import com.atguigu.jxc.service.PurchaseListGoodsService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -38,6 +39,9 @@ public class PurchaseListGoodsServiceImpl implements PurchaseListGoodsService {
     @Autowired
     private PurchaseListGoodsDao purchaseListGoodsDao;
 
+    @Autowired
+    private GoodsService goodsService;
+
     @Override
     public String count(String sTime, String eTime, Integer goodsTypeId, String codeOrName) {
         List<PurchaseVo> list = this.purchaseListGoodsDao.count(sTime, eTime, goodsTypeId, codeOrName);
@@ -62,6 +66,8 @@ public class PurchaseListGoodsServiceImpl implements PurchaseListGoodsService {
         Integer count = 0;
         for (PurchaseListGoods purchaseListGoods : purchaseListGoodsList) {
             purchaseListGoods.setPurchaseListId(purchaseListId);
+            // 加库存
+            goodsService.updateCount(purchaseListGoods.getGoodsId(), purchaseListGoods.getGoodsNum());
             if (this.purchaseListGoodsDao.savePurchaseListGoods(purchaseListGoods) == 1) {
                 count++;
             }
@@ -83,7 +89,7 @@ public class PurchaseListGoodsServiceImpl implements PurchaseListGoodsService {
     }
 
     public Map<String, Object> queryGoodsByPurchaseListId(Integer purchaseListId) {
-        List<PurchaseListGoods> purchaseListGoodsList= this.purchaseListGoodsDao.queryGoodsByPurchaseListId(purchaseListId);
+        List<PurchaseListGoods> purchaseListGoodsList = this.purchaseListGoodsDao.queryGoodsByPurchaseListId(purchaseListId);
         Map<String, Object> map = new HashMap<>();
         map.put("rows", purchaseListGoodsList);
         return map;
@@ -92,7 +98,13 @@ public class PurchaseListGoodsServiceImpl implements PurchaseListGoodsService {
     @Override
     public ServiceVO deletePurchaseListById(Integer purchaseListId) {
         this.purchaseListGoodsDao.deleteGoodsByPurchaseListId(purchaseListId);
+        List<PurchaseListGoods> purchaseListGoodsList = this.purchaseListGoodsDao.queryGoodsByPurchaseListId(purchaseListId);
+        for (PurchaseListGoods purchaseListGoods : purchaseListGoodsList) {
+            purchaseListGoods.setPurchaseListId(purchaseListId);
+            // 减库存
+            goodsService.updateCount(purchaseListGoods.getGoodsId(), -purchaseListGoods.getGoodsNum());
+        }
         this.purchaseListDao.deletePurchaseListById(purchaseListId);
-        return new ServiceVO(SuccessCode.SUCCESS_CODE,SuccessCode.SUCCESS_MESS);
+        return new ServiceVO(SuccessCode.SUCCESS_CODE, SuccessCode.SUCCESS_MESS);
     }
 }

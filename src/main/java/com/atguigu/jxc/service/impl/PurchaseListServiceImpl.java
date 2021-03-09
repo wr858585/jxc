@@ -28,6 +28,7 @@ public class PurchaseListServiceImpl implements PurchaseListService {
         // 拿到用户的id
         User user = (User)session.getAttribute("currentUser");
         purchaseList.setUserId(user.getUserId());
+        purchaseList.setTrueName(user.getTrueName());
         this.purchaseListDao.savePurchaseList(purchaseList);
         // 拿到当前入库单的id
         return purchaseList.getPurchaseListId();
