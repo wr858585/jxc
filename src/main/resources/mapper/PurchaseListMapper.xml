@@ -36,15 +36,18 @@
             t_purchase_list.remarks,
             state,
             t_purchase_list.supplier_id,
-            user_id,
+            t_purchase_list.user_id,
             t_supplier.supplier_name supplier_name,
-            t_supplier.contacts true_name
+            t_user.true_name true_name
 
         FROM
             t_purchase_list
         LEFT  JOIN
             t_supplier
         ON  t_purchase_list.supplier_id = t_supplier.supplier_id
+        LEFT JOIN
+            t_user
+        ON t_user.user_id=t_purchase_list.user_id
         <where>
             <if test="purchaseNumber != null and purchaseNumber !=''">
                 purchase_number=#{purchaseNumber}
