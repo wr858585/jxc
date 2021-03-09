@@ -2,6 +2,8 @@ package com.atguigu.jxc.service;
 
 import com.atguigu.jxc.domain.ServiceVO;
 
+import java.util.Map;
+
 public interface ReturnListGoodsService {
 
     /**
@@ -10,4 +12,7 @@ public interface ReturnListGoodsService {
      * @return
      */
     ServiceVO saveReturnListGoods(Integer returnListId, String returnListGoodsStr);
+
+    Map<String, Object> queryReturnGoodsList(Integer returnListId);
+
 }

@@ -1,5 +1,6 @@
 package com.atguigu.jxc.service;
 
+import com.atguigu.jxc.domain.ServiceVO;
 import com.atguigu.jxc.entity.ReturnList;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -25,4 +26,5 @@ public interface ReturnListService {
      */
     Map<String, Object> queryReturnList(String returnNumber, Integer supplierId, Integer state, String sTime, String eTime);
 
+    ServiceVO deleteReturnList(Integer returnListId);
 }

@@ -13,7 +13,9 @@ import com.google.gson.reflect.TypeToken;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ReturnListGoodsServiceImpl implements ReturnListGoodsService {
@@ -40,4 +42,13 @@ public class ReturnListGoodsServiceImpl implements ReturnListGoodsService {
         }
         return new ServiceVO<>(SuccessCode.SUCCESS_CODE, SuccessCode.SUCCESS_MESS);
     }
+
+    @Override
+    public Map<String, Object> queryReturnGoodsList(Integer returnListId) {
+        HashMap<String, Object> map = new HashMap<>();
+        List<Map<String, Object>> returnGoodsLists = returnListGoodsDao.queryReturnGoodsList(returnListId);
+        map.put("rows",returnGoodsLists);
+        return map;
+    }
+
 }

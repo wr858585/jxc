@@ -19,6 +19,15 @@
         <result column="goods_type_id" property="goodsTypeId" jdbcType="INTEGER" />
     </resultMap>
 
+    <select id="queryReturnGoodsList" resultType="com.atguigu.jxc.entity.ReturnListGoods">
+
+        SELECT
+        return_list_goods_id,goods_id,goods_code,goods_name,goods_model,goods_unit,goods_num,price,total,return_list_id,goods_type_id
+        FROM t_return_list_goods
+        WHERE return_list_id = #{returnListId};
+
+    </select>
+
     <update id="saveReturnListGoods" parameterType="com.atguigu.jxc.entity.ReturnListGoods" useGeneratedKeys="true" keyProperty="returnListGoodsId">
         insert t_return_list_goods
         (goods_id, goods_code, goods_name, goods_model, goods_unit,goods_num,price,total,goods_type_id,return_list_id)
